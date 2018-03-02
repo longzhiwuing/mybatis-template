@@ -1,0 +1,2 @@
+# mybatis-template（springboot）
+mybatis模板例子包含xml配置、generator、注解的全套增删改查，用来快速搭建springboot版的mybatis项目

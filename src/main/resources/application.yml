@@ -1,0 +1,38 @@
+spring:
+  profiles : dev
+  datasource:
+    name: mydb
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://127.0.0.1:3306/testdb?characterEncoding=utf8
+    username: mysdc
+    password: mysdc
+    driver-class-name: com.mysql.jdbc.Driver
+    minIdle: 1
+    maxActive: 2
+    initialSize: 1
+    timeBetweenEvictionRunsMillis: 3000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 'ZTM' FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+
+
+mybatis:
+  mapperLocations: classpath*:/mapper/*.xml
+  typeAliasesPackage: com.lzwing.mybatisspringxmldemo.entity
+
+#日志查看SQL语句
+logging:
+  level:
+    com.lzwing.mybatisspringxmldemo.mapper: trace
+
+#pagehelper分页插件
+pagehelper:
+    helperDialect: mysql
+    reasonable: true
+    supportMethodsArguments: true
+    params: count=countSql
+
+#server:
+#  context-path: /sell
