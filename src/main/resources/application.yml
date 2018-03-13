@@ -25,6 +25,7 @@ mybatis:
 #日志查看SQL语句
 logging:
   level:
+    com.lzwing.mybatisspringxmldemo.ProductCategoryMapperTest: debug
     com.lzwing.mybatisspringxmldemo.mapper: trace
 
 #pagehelper分页插件

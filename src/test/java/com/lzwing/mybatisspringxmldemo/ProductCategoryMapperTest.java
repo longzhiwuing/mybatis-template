@@ -1,7 +1,10 @@
 package com.lzwing.mybatisspringxmldemo;
 
+import com.github.pagehelper.PageHelper;
+import com.lzwing.mybatisspringxmldemo.entity.PageBean;
 import com.lzwing.mybatisspringxmldemo.entity.ProductCategory;
 import com.lzwing.mybatisspringxmldemo.mapper.ProductCategoryMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,10 +24,52 @@ import java.util.Map;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @ActiveProfiles(value="dev")
+@Slf4j
 public class ProductCategoryMapperTest {
 
     @Autowired
     private ProductCategoryMapper mapper;
+
+    @Test
+    public void testAll() {
+        List<ProductCategory> allItems = mapper.findAll();        //全部商品
+        if (log.isDebugEnabled()) {
+            log.debug("allItems:{}",allItems.size());
+        }
+    }
+
+    @Test
+    public void pageHelperTest() {
+        int currentPage = 2;
+        int pageSize = 7;
+        //使用分页插件,核心代码就这一行
+        PageHelper.startPage(currentPage, pageSize);
+
+        List<ProductCategory> allItems = mapper.findAll();        //全部商品
+        int countNums = mapper.countItem();            //总记录数
+        PageBean<ProductCategory> pageData = new PageBean<>(currentPage, pageSize, countNums);
+        pageData.setItems(allItems);
+
+        List<ProductCategory> items = pageData.getItems();
+        if (log.isDebugEnabled()) {
+            for (ProductCategory item : items) {
+                log.debug("item:{}",item);
+            }
+        }
+    }
+
+    @Test
+    public void insertList4demo() {
+        for(int i=17;i<17+17;i++) {
+            Map<String, Object> map = new HashMap<>();
+            map.put("category_name","test"+i);
+            map.put("category_type",100+i);
+            int result = mapper.insertByMap(map);
+            if (log.isDebugEnabled()) {
+                log.debug("result:{}",result);
+            }
+        }
+    }
 
     @Test
     public void insertByMap() throws Exception {

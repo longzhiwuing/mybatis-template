@@ -16,4 +16,14 @@
         where category_type = #{category_type,jdbcType=INTEGER}
     </select>
 
+    <select id="findAll" resultMap="BaseResultMap">
+        select
+        <include refid="base_column" />
+        from product_category
+    </select>
+
+    <select id="countItem" resultType="java.lang.Integer">
+        select count(*) from product_category
+    </select>
+
 </mapper>

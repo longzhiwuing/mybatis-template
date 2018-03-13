@@ -94,4 +94,8 @@ public interface ProductCategoryMapper {
      * @return
      */
     ProductCategory selectByCategoryType(Integer categoryType);
+
+    List<ProductCategory> findAll();
+
+    int countItem();
 }
